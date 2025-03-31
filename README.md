@@ -4,13 +4,15 @@ This project implements a hybrid approach for solving the classic Taxi-v3 enviro
 
 ## Overview
 
+This project implements a similar algorithm from the paper **Interpretable and Editable Programmatic Tree Policies for Reinforcement Learning** ([link to paper](https://openreview.net/pdf?id=zafp5CwoTq)), with the distinction that the decision tree is partially clad, rather than fully (see the explanation in the **features** section).
+
 The workflow is as follows:
 
 1. Train a Q-learning agent on the Taxi-v3 environment (`trainQ.py`).
 2. Generate training data using the Q-table and interpretable feature extraction (`data_creation.py`).
 3. Train a decision tree model using the generated data (`taxi_decision_tree.py`).
-4. Run and evaluate the decision tree agent in the environment (`run_dt.py`).
-5. Visualize performance using reward plots.
+4. Run and evaluate the decision tree agent in the environment (`run_dt.py` or 'try.py').
+5. Visualize (`try.py`) and measure performance using reward plots.
 
 ## Project Setup Instructions
 
