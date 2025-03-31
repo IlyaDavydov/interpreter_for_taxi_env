@@ -22,10 +22,37 @@ First, create a new Conda environment with Python 3.10. Run the following comman
 
 ```bash
 conda create --name your_env_name python=3.10
-conda activate your_env_name
+```
 pip install gymnasium numpy pandas matplotlib scikit-learn
+
+### 2. Activate the Environment
+
+After the environment is created, activate it by running:
+
+```bash
+conda activate your_env_name
+```
+This command switches to the environment you just created.
+
+### 3. Install the Required Dependencies
+
+To install the necessary dependencies, use the following command:
+
+```bash
+conda install gymnasium numpy pandas matplotlib scikit-learn
 ```
 
+This will install the following Python packages:
+
+gymnasium: For interacting with the OpenAI Gym environments.
+
+numpy: For numerical computations and data manipulation.
+
+pandas: For data manipulation and analysis.
+
+matplotlib: For plotting and visualizations.
+
+scikit-learn: For machine learning tools, including the decision tree model.
 
 ## Project Structure
 
