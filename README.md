@@ -52,35 +52,6 @@ This will install the following Python packages:
 - [ ] matplotlib: For plotting and visualizations.
 - [ ] scikit-learn: For machine learning tools, including the decision tree model.
 
-
-## Project Structure
-
-| File | Description |
-|------|-------------|
-| `trainQ.py` | Trains the taxi using Q-learning (100% accuracy, but not interpretable). |
-| `data_creation.py` | Generates data based on Q-learning policy in test mode and extracts features. |
-| `features_extraction.py` | Helps extract interpretable features from the environment's state. |
-| `taxi_decision_tree.py` | Builds a decision tree based on the generated DataFrame. |
-| `run_dt.py` | Runs the simulation using the trained decision tree. |
-| `try.py` | Main script to run the full training and evaluation pipeline. |
-
-## Getting Started
-
-### Requirements
-
-- Python 3.10+
-- [gymnasium](https://github.com/Farama-Foundation/Gymnasium)
-- numpy
-- pandas
-- matplotlib
-- scikit-learn
-
-You can install the required packages using pip:
-
-```bash
-pip install gymnasium numpy pandas matplotlib scikit-learn
-```
-
 ### Running the Project
 
 **To train from scratch:**
@@ -89,19 +60,19 @@ pip install gymnasium numpy pandas matplotlib scikit-learn
 python try.py
 ```
 
-This will:
-- Train the Q-learning model
-- Generate a dataset from the Q-table
-- Train a decision tree using interpretable features
-- Run the simulation using the trained decision tree
+We have provided detailed and clear instructions for running the project in the `try.py` file.
+Therefore, simply review the file and run it in the way that best suits your needs and goals (whether you want to observe the agent's behavior or just test without playback, recording statistics; whether you already have pickle files with instructions, or if you are running the project from scratch for the first time, etc.).
 
-**To run without retraining:**
+## Project Structure
 
-If the model has already been trained, you can skip training and just use the existing `.pkl` files:
-
-```bash
-python run_dt.py
-```
+| File | Description |
+|------|-------------|
+| `trainQ.py` | Trains the taxi using Q-learning (100% accuracy, but not interpretable) |
+| `data_creation.py` | Generates data based on Q-learning policy in test mode and extracts features |
+| `features_extraction.py` | Helps extract interpretable features from the environment's state |
+| `taxi_decision_tree.py` | Builds a decision tree based on the generated DataFrame |
+| `run_dt.py` | Runs the simulation using the trained decision tree |
+| `try.py` | Main script to run the full training and evaluation pipeline |
 
 ## Feature Engineering Philosophy
 
