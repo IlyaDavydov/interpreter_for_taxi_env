@@ -24,6 +24,7 @@ First, create a new Conda environment with Python 3.10. Run the following comman
 conda create --name your_env_name python=3.10
 conda activate your_env_name
 pip install gymnasium numpy pandas matplotlib scikit-learn
+```
 
 
 ## Project Structure
