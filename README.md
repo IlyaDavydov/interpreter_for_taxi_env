@@ -134,7 +134,7 @@ Despite these issues, we achieved the following goals:
 
 ### Agent Behavior
 Here you can see the agent's behavior:  
-**_INSERT VIDEO HERE_**
+![Agent Demonstration](taxi-test_6UXHD2MH.mp4)
 
 ### Performance Comparison
 
@@ -142,16 +142,15 @@ We developed a metric to compare Q-Learning and Decision Tree approaches: the av
 
 ### Results Comparison
 **Q-Learning vs. Decision Tree**  
-_Photo 1_ | _Photo 2_  
-**_INSERT IMAGES HERE_**
+![Q_Learning](taxi_train_steps.png) | ![Decision_Tree](taxi_dt_steps.png)
+
 
 As seen in the results, the performance is generally good. The Q-Learning agent, after 10,000 iterations and achieving 100% accuracy on this map, reaches the goal in an average of 12 steps. Meanwhile, the Decision Tree Agent typically reaches the goal in 18-19 steps (with a fluctuating graph due to occasional looping). This is a promising result, as the difference is not too large, and the Decision Tree Agent remains generalizable, interpretable, and potentially improvable. We believe that the looping issue can be resolved in future iterations.
 
 ### Decision Tree Visualization
 The Decision Tree class includes a `print_tree` function, allowing users to inspect how the agent makes decisions. Below is a sample output:
 
-_Photo 3_  
-**_INSERT IMAGE HERE_**
+  ![Decision Tree Human View](dt_tree.png)
  
 
 ## Model Persistence
