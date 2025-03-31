@@ -12,6 +12,20 @@ The workflow is as follows:
 4. Run and evaluate the decision tree agent in the environment (`run_dt.py`).
 5. Visualize performance using reward plots.
 
+## Project Setup Instructions
+
+Follow the steps below to create a Conda environment and install the required dependencies for the project.
+
+### 1. Create a New Conda Environment
+
+First, create a new Conda environment with Python 3.10. Run the following commands:
+
+```bash
+conda create --name your_env_name python=3.10
+conda activate your_env_name
+pip install gymnasium numpy pandas matplotlib scikit-learn
+
+
 ## Project Structure
 
 | File | Description |
