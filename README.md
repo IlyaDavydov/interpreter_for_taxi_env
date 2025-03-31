@@ -96,6 +96,28 @@ The decision tree model mimics the behavior of the Q-agent with a reasonable tra
 - The maximum depth of the decision tree is configurable.
 - The system includes fallbacks in case the decision tree predicts invalid actions (e.g., retry with random choices).
 
+## Future Applications
+
+While the Taxi-v3 environment is a simplified, discrete grid-world, it offers a valuable abstraction for many real-world decision-making and planning problems—especially in domains involving **navigation, routing**, and **task execution** by autonomous agents.
+
+The core task in Taxi-v3—picking up a passenger and dropping them off at a destination—closely mirrors real-life logistics scenarios, such as those faced by **autonomous taxis**, **ride-sharing services**, or **delivery drones**. By training agents in such environments and emphasizing **interpretable decision-making**, we can build systems that are both **effective and understandable**—crucial for deploying AI in **real-world, safety-critical contexts**.
+
+One of the major contributions of this project is the **emphasis on interpretability**: instead of relying on opaque Q-tables or black-box neural networks, we extract **high-level, semantically meaningful** features.
+
+These features represent **human-understandable** reasoning strategies, which are more transferable and easier to debug or audit. Avoiding raw state inputs (like absolute coordinates) ensures that the agent's behavior is not overfitted to one specific environment layout, increasing the generalizability of the learned policy.
+
+Furthermore, this project could serve as a foundation for **integrating symbolic planners with language-based interfaces**. The inclusion of an interpreter module, capable of translating natural language commands into structured plans, opens the door for more intuitive and flexible human-agent interaction. For example, a future system could process commands such as “Pick up the passenger at the blue station and drop them at the green location” and automatically generate an executable, interpretable plan.
+
+Such a setup has promising applications in:
+
+- Human-robot collaboration: Enabling robots to follow natural-language instructions in warehouses, factories, or homes.
+
+- Autonomous mobility systems: Providing safe, explainable decision-making for taxis or last-mile delivery bots.
+
+- Education and research: Serving as a modular framework to study planning, RL, and explainability.
+
+In essence, the Taxi-v3 environment acts as a sandbox for testing ideas that scale to the physical world, and by combining interpretable models with flexible instruction parsing, this project contributes to a growing effort in making AI not only powerful but also transparent and trustworthy.
+
 ## License
 
 This project is for academic and research purposes.
