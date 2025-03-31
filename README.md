@@ -25,32 +25,32 @@ First, create a new Conda environment with Python 3.10. Run the following comman
 ```bash
 conda create --name your_env_name python=3.10
 ```
-pip install gymnasium numpy pandas matplotlib scikit-learn
 
-### 2. Activate the Environment
-
-After the environment is created, activate it by running:
+Then activate it:
 
 ```bash
 conda activate your_env_name
 ```
-This command switches to the environment you just created.
 
-### 3. Install the Required Dependencies
+### 2. Install the Required Dependencies
 
 To install the necessary dependencies, use the following command:
 
 ```bash
 conda install gymnasium numpy pandas matplotlib scikit-learn
+pip install pygame
 ```
 
 This will install the following Python packages:
 
-- [ ] gymnasium: For interacting with the OpenAI Gym environments.
-- [ ] numpy: For numerical computations and data manipulation.
-- [ ] pandas: For data manipulation and analysis.
-- [ ] matplotlib: For plotting and visualizations.
-- [ ] scikit-learn: For machine learning tools, including the decision tree model.
+- [ ] `gymnasium`: For interacting with the OpenAI Gym environments.
+- [ ] `numpy`: For numerical computations and data manipulation.
+- [ ] `pandas`: For data manipulation and analysis.
+- [ ] `matplotlib`: For plotting and visualizations.
+- [ ] `scikit-learn`: For machine learning tools, including the decision tree model.
+- [ ] `pygame`: Required for rendering environments using `render(mode="human")`.
+
+---
 
 ### Running the Project
 
@@ -60,8 +60,7 @@ This will install the following Python packages:
 python try.py
 ```
 
-We have provided detailed and clear instructions for running the project in the `try.py` file.
-Therefore, simply review the file and run it in the way that best suits your needs and goals (whether you want to observe the agent's behavior or just test without playback, recording statistics; whether you already have pickle files with instructions, or if you are running the project from scratch for the first time, etc.).
+We have provided detailed and clear instructions for running the project in the `try.py` file. Therefore, simply review the file and run it in the way that best suits your needs and goals (whether you want to observe the agent's behavior or just test without playback, recording statistics; whether you already have pickle files with instructions, or if you are running the project from scratch for the first time, etc.).
 
 ## Project Structure
 
