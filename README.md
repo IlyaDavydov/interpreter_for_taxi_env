@@ -1,6 +1,6 @@
 # Taxi Decision Tree Agent
 
-This project implements a hybrid approach for solving the classic Taxi-v3 environment from OpenAI Gym using a combination of **Q-learning**, **interpretable feature engineering**, and **decision tree classification**. The goal is to train a Q-learning agent and then extract interpretable features to build a decision tree that mimics its behavior without relying on raw positional data.
+This project implements a hybrid approach for solving the classic Taxi-v3 environment (https://www.gymlibrary.dev/environments/toy_text/taxi/) from OpenAI Gym using a combination of **Q-learning**, **interpretable feature engineering**, and **decision tree classification**. The goal is to train a Q-learning agent and then extract interpretable features to build a decision tree that mimics its behavior without relying on raw positional data.
 
 ## Overview
 
@@ -123,9 +123,36 @@ _"If position is (1,3) → Move right."_
 
 Even though raw coordinates might lead to better accuracy, the resulting model is harder to interpret and tightly bound to the map structure.
 
-## Evaluation
+## Results & Demonstration
 
-The decision tree model mimics the behavior of the Q-agent with a reasonable trade-off between accuracy and interpretability. 
+Overall, the results are positive, and the approach makes sense. However, some unresolved issues still need to be addressed in the future. One recurring problem is that the agent sometimes gets stuck in a loop. This likely happens because, in certain positions, the optimal move requires temporarily moving away from the goal to bypass an obstacle. Instead, the agent keeps moving along the obstacle, initially reducing the distance to the goal but ultimately leading to an error. Additionally, the agent occasionally follows suboptimal paths.
+
+Despite these issues, we achieved the following goals:
+1. The agent almost always reaches the goal one way or another.
+2. In most cases, the agent selects an optimal path.
+3. Considering points 1 and 2, the agent remains interpretable and generalizable.
+
+### Agent Behavior
+Here you can see the agent's behavior:  
+**_INSERT VIDEO HERE_**
+
+### Performance Comparison
+
+We developed a metric to compare Q-Learning and Decision Tree approaches: the average number of steps taken over 100 iterations. The assumption is that an optimally performing agent will take the least number of steps on average. If the agent gets stuck in a loop or fails to find the goal, the number of steps will be significantly higher.
+
+### Results Comparison
+**Q-Learning vs. Decision Tree**  
+_Photo 1_ | _Photo 2_  
+**_INSERT IMAGES HERE_**
+
+As seen in the results, the performance is generally good. The Q-Learning agent, after 10,000 iterations and achieving 100% accuracy on this map, reaches the goal in an average of 12 steps. Meanwhile, the Decision Tree Agent typically reaches the goal in 18-19 steps (with a fluctuating graph due to occasional looping). This is a promising result, as the difference is not too large, and the Decision Tree Agent remains generalizable, interpretable, and potentially improvable. We believe that the looping issue can be resolved in future iterations.
+
+### Decision Tree Visualization
+The Decision Tree class includes a `print_tree` function, allowing users to inspect how the agent makes decisions. Below is a sample output:
+
+_Photo 3_  
+**_INSERT IMAGE HERE_**
+ 
 
 ## Model Persistence
 
