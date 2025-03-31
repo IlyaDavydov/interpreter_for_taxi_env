@@ -4,7 +4,24 @@ import matplotlib.pyplot as plt
 import pickle
 
 def train_or_test_q(episodes, is_training=True, render=False):
+    """
+    Trains or tests a Q-learning agent on the Taxi-v3 environment.
 
+    Parameters:
+    - episodes (int): Number of episodes to run.
+    - is_training (bool, optional): If True, the function trains the agent; otherwise, it tests a pre-trained model. Default is True.
+    - render (bool, optional): If True, the environment is rendered during execution. Default is False.
+
+    Description:
+    - If `is_training` is True, initializes a Q-table with zeros and updates it using the Q-learning algorithm.
+    - If `is_training` is False, loads a pre-trained Q-table from 'taxi.pkl'.
+    - Implements an epsilon-greedy strategy for action selection.
+    - Decays epsilon over time to shift from exploration to exploitation.
+    - Tracks and plots the average number of steps per 100 episodes.
+    - Saves the trained Q-table to 'taxi.pkl' after training.
+    - Saves a graph showing training/testing progress.
+    """
+        
     env = gym.make('Taxi-v3', render_mode='human' if render else None)
 
     if(is_training):
@@ -21,6 +38,7 @@ def train_or_test_q(episodes, is_training=True, render=False):
     rng = np.random.default_rng()   # random number generator
 
     rewards_per_episode = np.zeros(episodes)
+    steps_per_episode = np.zeros(episodes)  # Храним количество шагов
 
     for i in range(episodes):
         state = env.reset()[0]  # states: 
@@ -28,13 +46,9 @@ def train_or_test_q(episodes, is_training=True, render=False):
         truncated = False       # True when actions > 200
 
         rewards = 0
-        while(not terminated and not truncated):
+        steps = 0
 
-            locations = [(0, 0), (0, 4), (4, 0), (4, 3)]  # R, G, Y, B
-            taxi_row, taxi_col, pass_loc, dest = env.unwrapped.decode(state)
-            dest_row, dest_col = locations[dest]
-            passenger_row, passenger_col = locations[pass_loc] if pass_loc < 4 else (taxi_row, taxi_col)
-            print(f'taxi_col {taxi_col}, taxi_row {taxi_row}, dest {dest}, dest_row {dest_row}, dest_col {dest_col}, pass_loc {pass_loc}, pass_col {passenger_col}, pass_row {passenger_row}')
+        while(not terminated and not truncated):
 
             if is_training and rng.random() < epsilon:
                 action = env.action_space.sample() # actions
@@ -52,10 +66,14 @@ def train_or_test_q(episodes, is_training=True, render=False):
 
             state = new_state
 
+            steps += 1
+
         epsilon = max(epsilon - epsilon_decay_rate, 0)
 
         if(epsilon==0):
             learning_rate_a = 0.0001
+
+        steps_per_episode[i] = steps  # save the count steps    
 
 
         rewards_per_episode[i] = rewards
@@ -63,20 +81,22 @@ def train_or_test_q(episodes, is_training=True, render=False):
     env.close()
 
     sum_rewards = np.zeros(episodes)
+    avg_steps = np.zeros(episodes)
     for t in range(episodes):
-        sum_rewards[t] = np.sum(rewards_per_episode[max(0, t-100):(t+1)])
-    plt.plot(sum_rewards)
+        avg_steps[t] = np.mean(steps_per_episode[max(0, t - 100):(t + 1)])
+
+    plt.plot(avg_steps)
+    plt.xlabel("Episodes")
+    plt.ylabel("Avg Steps per 100 Episodes")
+    plt.title("Learning Progress")
+
     if is_training:
-        plt.savefig('taxi_train.png')
+        plt.savefig('taxi_train_steps.png')
     else:
-        plt.savefig('taxi_test.png')    
+        plt.savefig('taxi_test_steps.png') 
 
     if is_training:
         f = open("taxi.pkl","wb")
         pickle.dump(q, f)
         f.close()
 
-if __name__ == '__main__':
-    #run(15000)
-    env = gym.make('Taxi-v3', render_mode='human' if render else None)
-    run(1, is_training=False, render=True, env=env)
