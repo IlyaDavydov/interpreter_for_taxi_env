@@ -136,6 +136,8 @@ Despite these issues, we achieved the following goals:
 Here you can see the agent's behavior:  
 [Agent Demonstration](taxi-test_6UXHD2MH.mp4)
 
+If this doesn't work, run it from the repository files (`taxi-test_6UXHD2MH.mp4`)
+
 ### Performance Comparison
 
 We developed a metric to compare Q-Learning and Decision Tree approaches: the average number of steps taken over 100 iterations. The assumption is that an optimally performing agent will take the least number of steps on average. If the agent gets stuck in a loop or fails to find the goal, the number of steps will be significantly higher.
