@@ -38,7 +38,7 @@ To install the necessary dependencies, use the following command:
 
 ```bash
 conda install gymnasium numpy pandas matplotlib scikit-learn
-pip install pygame
+conda install pygame
 ```
 
 This will install the following Python packages:
@@ -52,13 +52,17 @@ This will install the following Python packages:
 
 ---
 
-### Running the Project
+### Running the Project & What has been implemented (what needs to be tested)
+
+We have implemented the Q-Learning algorithm for training an agent, a data generation function based on the trained Q-Learning agent, which can then be used to create a decision tree in the Taxi environment, and a function for testing this agent with the option to visualize it. Additionally, we have integrated graph generation functions that automatically save plots to the project folder and added the ability to generate a human-readable decision tree (print_tree).
 
 **To train from scratch:**
 
 ```bash
 python try.py
 ```
+
+**Please note** that we provide you with the flexibility to run the project in a way that suits you best. In the try.py file, additional examples are commented out with explanations of what will happen if you uncomment them.
 
 We have provided detailed and clear instructions for running the project in the `try.py` file. Therefore, simply review the file and run it in the way that best suits your needs and goals (whether you want to observe the agent's behavior or just test without playback, recording statistics; whether you already have pickle files with instructions, or if you are running the project from scratch for the first time, etc.).
 
