@@ -1,0 +1,101 @@
+# Taxi Decision Tree Agent
+
+This project implements a hybrid approach for solving the classic Taxi-v3 environment from OpenAI Gym using a combination of **Q-learning**, **interpretable feature engineering**, and **decision tree classification**. The goal is to train a Q-learning agent and then extract interpretable features to build a decision tree that mimics its behavior without relying on raw positional data.
+
+## Overview
+
+The workflow is as follows:
+
+1. Train a Q-learning agent on the Taxi-v3 environment (`trainQ.py`).
+2. Generate training data using the Q-table and interpretable feature extraction (`data_creation.py`).
+3. Train a decision tree model using the generated data (`taxi_decision_tree.py`).
+4. Run and evaluate the decision tree agent in the environment (`run_dt.py`).
+5. Visualize performance using reward plots.
+
+## Project Structure
+
+| File | Description |
+|------|-------------|
+| `trainQ.py` | Trains the taxi using Q-learning (100% accuracy, but not interpretable). |
+| `data_creation.py` | Generates data based on Q-learning policy in test mode and extracts features. |
+| `features_extraction.py` | Helps extract interpretable features from the environment's state. |
+| `taxi_decision_tree.py` | Builds a decision tree based on the generated DataFrame. |
+| `run_dt.py` | Runs the simulation using the trained decision tree. |
+| `try.py` | Main script to run the full training and evaluation pipeline. |
+
+## Getting Started
+
+### Requirements
+
+- Python 3.10+
+- [gymnasium](https://github.com/Farama-Foundation/Gymnasium)
+- numpy
+- pandas
+- matplotlib
+- scikit-learn
+
+You can install the required packages using pip:
+
+```bash
+pip install gymnasium numpy pandas matplotlib scikit-learn
+```
+
+### Running the Project
+
+**To train from scratch:**
+
+```bash
+python try.py
+```
+
+This will:
+- Train the Q-learning model
+- Generate a dataset from the Q-table
+- Train a decision tree using interpretable features
+- Run the simulation using the trained decision tree
+
+**To run without retraining:**
+
+If the model has already been trained, you can skip training and just use the existing `.pkl` files:
+
+```bash
+python run_dt.py
+```
+
+## Feature Engineering Philosophy
+
+Instead of using raw positional data (e.g., taxi coordinates, passenger location), we focus on **interpretable features** such as:
+
+- Whether the **distance to the passenger or destination** increases or decreases after taking an action.
+- Whether a certain **movement is even possible** (e.g., is there a wall?).
+- Whether the taxi is **at a special location**.
+- Whether it’s time to **drop off the passenger**.
+- Whether a previous action was performed.
+
+This design helps keep the decision tree **interpretable and generalizable**, rather than overfitting to specific grid coordinates.
+
+**Preferred**:  
+_"Does the distance to the goal decrease when moving right? → Yes → Move right."_
+
+**Avoided**:  
+_"If position is (1,3) → Move right."_
+
+Even though raw coordinates might lead to better accuracy, the resulting model is harder to interpret and tightly bound to the map structure.
+
+## Evaluation
+
+The decision tree model mimics the behavior of the Q-agent with a reasonable trade-off between accuracy and interpretability. 
+
+## Model Persistence
+
+- Q-table is saved to `taxi.pkl`
+- Decision tree model is saved to `taxi_decision_tree_model.pkl`
+
+## Notes
+
+- The maximum depth of the decision tree is configurable.
+- The system includes fallbacks in case the decision tree predicts invalid actions (e.g., retry with random choices).
+
+## License
+
+This project is for academic and research purposes.
