@@ -44,15 +44,12 @@ conda install gymnasium numpy pandas matplotlib scikit-learn
 
 This will install the following Python packages:
 
-gymnasium: For interacting with the OpenAI Gym environments.
+- [ ] gymnasium: For interacting with the OpenAI Gym environments.
+- [ ] numpy: For numerical computations and data manipulation.
+- [ ] pandas: For data manipulation and analysis.
+- [ ] matplotlib: For plotting and visualizations.
+- [ ] scikit-learn: For machine learning tools, including the decision tree model.
 
-numpy: For numerical computations and data manipulation.
-
-pandas: For data manipulation and analysis.
-
-matplotlib: For plotting and visualizations.
-
-scikit-learn: For machine learning tools, including the decision tree model.
 
 ## Project Structure
 
