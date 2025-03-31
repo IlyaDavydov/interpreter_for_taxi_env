@@ -4,7 +4,7 @@ This project implements a hybrid approach for solving the classic Taxi-v3 enviro
 
 ## Overview
 
-This project implements a similar algorithm from the paper **Interpretable and Editable Programmatic Tree Policies for Reinforcement Learning** ([link to paper](https://openreview.net/pdf?id=zafp5CwoTq)), with the distinction that the decision tree is partially clad, rather than fully (see the explanation in the **features** section).
+This project implements a similar algorithm from the paper **Interpretable and Editable Programmatic Tree Policies for Reinforcement Learning** ([link to paper](https://openreview.net/pdf?id=zafp5CwoTq)), with the distinction that the decision tree is partially oblique, rather than fully (see the explanation in the **features** section).
 
 The workflow is as follows:
 
@@ -76,13 +76,42 @@ Therefore, simply review the file and run it in the way that best suits your nee
 
 ## Feature Engineering Philosophy
 
-Instead of using raw positional data (e.g., taxi coordinates, passenger location), we focus on **interpretable features** such as:
+**For more detailed information and specific implementation, refer to the file `features_extraction.py`**
 
-- Whether the **distance to the passenger or destination** increases or decreases after taking an action.
-- Whether a certain **movement is even possible** (e.g., is there a wall?).
-- Whether the taxi is **at a special location**.
-- Whether it’s time to **drop off the passenger**.
-- Whether a previous action was performed.
+The accuracy and quality of the decision tree depend on the features we choose. Therefore, **this section is critically important** – if you want to improve the model, you need to understand which features most accurately affect the outcome and either come up with them or remove unnecessary ones.
+
+We want to mention upfront that the task of building a decision tree for a specific map can be easily solved by using features such as the position of the taxi, the passenger, and the goal. This would create an overfitted decision tree that works perfectly on this map. However, its issues would be twofold: firstly, it would not be universal, and secondly, it would be harder to interpret (we would need to use absolute features, such as "if the position is (3,3), do action 'right'") instead of relative features like "will the distance to the goal decrease if I do action 'right'?" which is independent of the specific map and easier to understand for a human. 
+
+Our main goal is not to achieve exact results but to maintain good interpretability while keeping similar results.
+
+Moreover, this effectively makes the tree partially *oblique*, without requiring us to implement a complex ObliqueTree model. Even though the feature is formally one, it inherently includes several different features — for example, the current position, the future position, and the possible future action (essentially, it calculates the difference in Manhattan distances between the current and future possible states for each action).
+
+### Features Used in the Decision Tree Model
+
+- **Passenger Distance Change**: 
+  - Measures how the distance to the passenger changes after taking an action.
+
+- **Destination Distance Change**: 
+  - Measures how the distance to the destination changes after taking an action, but only when the passenger is in the taxi.
+
+- **Movement Feasibility**: 
+  - Checks whether certain movements (south, north, east, west) are possible based on the taxi’s current position and the environment's layout.
+
+- **Special Locations**: 
+  - Indicates whether the taxi is at a special location, such as one of the predefined pickup/drop-off points.
+
+- **Drop-off Condition**: 
+  - Identifies whether it is time to drop off the passenger, based on the taxi's position and whether the passenger is in the vehicle.
+
+- **Previous Action**: 
+  - Tracks the last action performed by the taxi (useful for creating a sequence-based model).
+
+- **Directionality**: 
+  - Determines the direction the taxi should move in relation to the passenger or destination, based on their relative positions.
+
+- **Taxi in Specific Position (2,1)**: 
+  - Checks if the taxi is in a known position where the agent often gets stuck, which helps avoid loops in the learning process.
+
 
 This design helps keep the decision tree **interpretable and generalizable**, rather than overfitting to specific grid coordinates.
 
