@@ -38,7 +38,7 @@ To install the necessary dependencies, use the following command:
 
 ```bash
 conda install gymnasium numpy pandas matplotlib scikit-learn
-conda install pygame
+pip install gymnasium[toy-text]
 ```
 
 This will install the following Python packages:
@@ -48,7 +48,7 @@ This will install the following Python packages:
 - [ ] `pandas`: For data manipulation and analysis.
 - [ ] `matplotlib`: For plotting and visualizations.
 - [ ] `scikit-learn`: For machine learning tools, including the decision tree model.
-- [ ] `pygame`: Required for rendering environments using `render(mode="human")`.
+- [ ] `gymnasium[toy-text]`: Required for rendering environments using `render(mode="human")`.
 
 ---
 
