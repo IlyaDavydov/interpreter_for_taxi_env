@@ -88,7 +88,7 @@ def extract_features(state, env):
     taxi_at_special_location = int((taxi_row, taxi_col) in locations)
 
     # 5. Can the action be performed?
-    action_is_possible_south = int(can_move_east)
+    action_is_possible_south = int(can_move_south)
     action_is_possible_north = int(can_move_north)
     action_is_possible_west = int(can_move_west)
     action_is_possible_east = int(can_move_east)
