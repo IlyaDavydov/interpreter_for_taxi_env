@@ -36,33 +36,28 @@ def run_dt(episodes, render=False, agent=None):
         steps = 0
         prev_action = None
 
-        rewards_per_episode = np.zeros(episodes)
-
         while(not terminated and not truncated):
             
             action = agent.predict(state, env, prev_action)[0]
 
-            new_state,reward,terminated,truncated,_ = env.step(action)
-
-            # If the state does not change, take a random step (avoid getting stuck)
-            max_attempts = 5  # Limit on the number of attempts to change state
-            attempts = 0
-
-            while new_state == state and attempts < max_attempts:
-                action = random.randint(0, 3)  # Take a random action
-                new_state, reward, terminated, truncated, _ = env.step(action)
-                attempts += 1   
-
+            new_state, reward, terminated, truncated, _ = env.step(action)
             rewards += reward
-
-            state = new_state
-
-            prev_action = action
-
             steps += 1
 
-            if render and steps > 25:
-                truncated = True
+            max_attempts = 5
+            attempts = 0
+
+            while (new_state == state and not terminated and not truncated and attempts < max_attempts):
+                action = random.randint(0, 3)
+                new_state, reward, terminated, truncated, _ = env.step(action)
+                rewards += reward
+                steps += 1
+                attempts += 1
+
+        state = new_state
+        prev_action = action
+        if render and steps > 25:
+            truncated = True
 
         rewards_per_episode[i] = rewards
         steps_per_episode[i] = steps  # Store the number of steps   
