@@ -54,10 +54,10 @@ def run_dt(episodes, render=False, agent=None):
                 steps += 1
                 attempts += 1
 
-        state = new_state
-        prev_action = action
-        if render and steps > 25:
-            truncated = True
+            state = new_state
+            prev_action = action
+            if render and steps > 25:
+                truncated = True
 
         rewards_per_episode[i] = rewards
         steps_per_episode[i] = steps  # Store the number of steps   
